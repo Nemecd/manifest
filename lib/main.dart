@@ -1,6 +1,7 @@
 
 import 'package:flutter/material.dart';
 import 'package:manifest/screens/SignupScreen.dart';
+import 'package:manifest/screens/SplashScreen.dart';
 
  void main()  {
   // WidgetsFlutterBinding.ensureInitialized();
@@ -20,7 +21,7 @@ class MyApp extends StatelessWidget {
         colorScheme: ColorScheme.fromSeed(seedColor: Colors.black),
         useMaterial3: true,
       ),
-      home: const SignupScreen(),
+      home: const SplashScreen(),
     );
   }
 }
