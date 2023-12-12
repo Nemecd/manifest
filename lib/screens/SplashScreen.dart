@@ -60,7 +60,7 @@ class _SplashScreenState extends State<SplashScreen>
 
     if (isLoggedIn) {
       Navigator.of(context).pushReplacement(
-        MaterialPageRoute(builder: (_) => bottomNav(userName: userData['userName'])),
+        MaterialPageRoute(builder: (_) => bottomNav(userId: userData['userName'])),
       );
     } else {
       Navigator.of(context).pushReplacement(
@@ -84,7 +84,7 @@ class _SplashScreenState extends State<SplashScreen>
           children: [
             Padding(
               padding: const EdgeInsets.only(top: 300.0),
-              child: Image.asset('assets/img/mainLogo.png', height: 50, width: 50),
+              child: Image.asset('assets/img/mainLogo.png', height: 70, width: 70),
             ),
             const SizedBox(height: 20,),
             AnimatedBuilder(
@@ -99,7 +99,19 @@ class _SplashScreenState extends State<SplashScreen>
                   ),
                 );
               },
-            )
+            ),
+            const SizedBox(height: 300), // Adjust this spacing as needed
+          Align(
+            alignment: Alignment.center,
+            child: Text(
+              'Licensed by the FRSC. \u00a9 2023',
+              style: TextStyle(
+                color: Colors.grey[400], // Ash color
+                fontSize: 16,
+                fontWeight: FontWeight.bold,
+              ),
+            ),
+          ),
           ],
         ),
       ),

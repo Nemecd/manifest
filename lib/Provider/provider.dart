@@ -27,9 +27,9 @@ class UserProvider extends ChangeNotifier {
     }
   }
 
-  void updateUserReports(int count) {
+  void updateUserReports() {
     if(_user != null){
-       _user!.reportCount = count;
+       _user!.reportCount++;
     notifyListeners();
     }
   }

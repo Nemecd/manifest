@@ -1,9 +1,9 @@
-import 'dart:convert';
 
 import 'package:flutter/material.dart';
 import 'package:manifest/Models/user.dart';
 import 'package:provider/provider.dart';
 import 'package:qr_flutter/qr_flutter.dart';
+//import 'package:share_plus/share_plus.dart';
 
 import '../../Provider/provider.dart';
 
@@ -20,17 +20,31 @@ class _CodeGenScreenState extends State<CodeGenScreen> {
     UserModel? user = Provider.of<UserProvider>(context).user;
       if (user != null) {
     // Create a string with user information
-    String userDataString = 'Drivers Name: ${user?.name}\nDrivers PhoneNumber: ${user?.phoneNumber}';
+    String userDataString = 'Driver\'s Name: ${user.name}\nDriver\'s PhoneNumber: ${user.email}';
+
     return userDataString;
   } else {
     // Handle the case where user data is not available
     return ''; // Or any other appropriate action
   }
-    // Create a string with user information
-    // String userDataString = "${user?.name}\n${user?.phoneNumber}";
-    // String userDataString = json.encode(user);
-    // return userDataString;
   }
+
+  //   void _shareQRCode() async {
+  //   String qrData = await generateQRCode();
+  //   if (qrData.isNotEmpty) {
+  //     final ByteData? qrImage = await QrPainter(
+  //       data: qrData,
+  //       version: QrVersions.auto,
+  //       size: 200.0,
+  //     ).toImageData(200);
+
+  //     // Share the QR code image using share_plus package
+  //     await Share.shareXFiles(
+  //       ['data:image/png;base64,${base64Encode(qrImage)}'],
+  //       text: 'Scan this code',
+  //     );
+  //   }
+  // }
 
   bool loading = false;
   @override

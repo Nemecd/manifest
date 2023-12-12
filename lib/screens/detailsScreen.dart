@@ -35,119 +35,87 @@ class _DetailScreenState extends State<DetailScreen> {
               color: Color(
                   0xFFf6fafd), // Set the background color using a BoxDecoration
             ),
-            child: Column(
-               crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                const Text('Origination',
-                    style: TextStyle(fontSize: 15, fontFamily: 'Inter')),
-                Text(widget.origination,
-                    style: const TextStyle(
-                        fontSize: 20,
-                        fontFamily: 'Inter',
-                        color: Color(0xFFa0a0a4))),
-                const Text('Destination',
-                    style: TextStyle(fontSize: 15, fontFamily: 'Inter')),
-                Text(widget.destination,
-                    style: const TextStyle(
-                        fontSize: 20,
-                        fontFamily: 'Inter',
-                        color: Color(0xFFa0a0a4))),
-                const Text('Date and Time',
-                    style: TextStyle(fontSize: 15, fontFamily: 'Inter')),
-                Text(widget.dateTime,
-                    style: const TextStyle(
-                        fontSize: 20,
-                        fontFamily: 'Inter',
-                        color: Color(0xFFa0a0a4))),
-                if (widget.waybillNumber != null)
-                  Text('Waybill Number: ${widget.waybillNumber}',
-                      style:
-                          const TextStyle(fontSize: 50, fontFamily: 'Inter')),
-                Padding(
-                  padding: const EdgeInsets.only(left:16.0, right: 16.0),
-                  child: ElevatedButton(
-                      onPressed: () {
-                        Navigator.push(
-                          context,
-                          MaterialPageRoute(
-                            builder: (context) =>  const ReportScreen(),
+            child: Padding(
+              padding: const EdgeInsets.only(left: 8.0),
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  const Text('Origination',
+                      style: TextStyle(fontSize: 15, fontFamily: 'Inter')),
+                  Text(widget.origination,
+                      style: const TextStyle(
+                          fontSize: 20,
+                          fontFamily: 'Inter',
+                          color: Color(0xFF97979a))),
+                          SizedBox(height: 20.0),
+                  const Text('Destination',
+                      style: TextStyle(fontSize: 15, fontFamily: 'Inter')),
+                      SizedBox(height: 20.0),
+                  Text(widget.destination,
+                      style: const TextStyle(
+                          fontSize: 20,
+                          fontFamily: 'Inter',
+                          color: Color(0xFF97979a))),
+                           SizedBox(height: 20.0),
+                  const Text('Date and Time',
+                      style: TextStyle(fontSize: 15, fontFamily: 'Inter')),
+                  Text(widget.dateTime,
+                      style: const TextStyle(
+                          fontSize: 20,
+                          fontFamily: 'Inter',
+                          color: Color(0xFF97979a))),
+                           SizedBox(height: 20.0),
+                  if (widget.waybillNumber != null)
+                    Text('Waybill Number: ${widget.waybillNumber}',
+                        style:
+                            const TextStyle(fontSize: 15, fontFamily: 'Inter')),
+                            SizedBox(height: 30.0),
+                  Padding(
+                    padding: const EdgeInsets.only(left: 16.0, right: 16.0),
+                    child: ElevatedButton(
+                        onPressed: () {
+                          Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                              builder: (context) => const ReportScreen(),
+                            ),
+                          );
+                        },
+                        style: ButtonStyle(
+                          minimumSize: MaterialStateProperty.all<Size>(
+                            const Size(double.infinity, 48.0),
                           ),
-                        );
-                      },
-                      style: ButtonStyle(
-                        minimumSize: MaterialStateProperty.all<Size>(
-                          const Size(double.infinity, 48.0),
-                        ),
-                        backgroundColor: const MaterialStatePropertyAll<Color>(
-                            Colors.red),
-                        shape: MaterialStateProperty.all<RoundedRectangleBorder>(
-                          RoundedRectangleBorder(
-                            borderRadius: BorderRadius.circular(
-                                10.0), // Reduce the border radius
-                          ),
-                        ),
-                      ),
-                      child: loading
-                          ? Container(
-                              width: 24,
-                              height: 24,
-                              child: const CircularProgressIndicator(
-                                valueColor: AlwaysStoppedAnimation<Color>(
-                                    Colors.white), // Set the color of the stroke
-                              ),
-                            )
-                          : const Text(
-                              'Report',
-                              style: TextStyle(
-                                fontFamily: 'Inter',
-                                fontSize: 16,
-                                color: Colors.white,
-                              ),
-                            )),
-                ),
-                 Padding(
-                  padding: const EdgeInsets.only(left:16.0, right: 16.0),
-                  child: ElevatedButton(
-                      onPressed: () {
-                        Navigator.push(
-                          context,
-                          MaterialPageRoute(
-                            builder: (context) =>  const ReportScreen(),
-                          ),
-                        );
-                      },
-                      style: ButtonStyle(
-                        minimumSize: MaterialStateProperty.all<Size>(
-                          const Size(double.infinity, 48.0),
-                        ),
-                        backgroundColor: const MaterialStatePropertyAll<Color>(
-                            Color(0XFF1e65ff)),
-                        shape: MaterialStateProperty.all<RoundedRectangleBorder>(
-                          RoundedRectangleBorder(
-                            borderRadius: BorderRadius.circular(
-                                10.0), // Reduce the border radius
+                          backgroundColor:
+                              const MaterialStatePropertyAll<Color>(Colors.red),
+                          shape:
+                              MaterialStateProperty.all<RoundedRectangleBorder>(
+                            RoundedRectangleBorder(
+                              borderRadius: BorderRadius.circular(
+                                  10.0), // Reduce the border radius
+                            ),
                           ),
                         ),
-                      ),
-                      child: loading
-                          ? Container(
-                              width: 24,
-                              height: 24,
-                              child: const CircularProgressIndicator(
-                                valueColor: AlwaysStoppedAnimation<Color>(
-                                    Colors.white), // Set the color of the stroke
-                              ),
-                            )
-                          : const Text(
-                              'Report',
-                              style: TextStyle(
-                                fontFamily: 'Inter',
-                                fontSize: 16,
-                                color: Colors.white,
-                              ),
-                            )),
-                )
-              ],
+                        child: loading
+                            ? Container(
+                                width: 24,
+                                height: 24,
+                                child: const CircularProgressIndicator(
+                                  valueColor: AlwaysStoppedAnimation<Color>(
+                                      Colors
+                                          .white), // Set the color of the stroke
+                                ),
+                              )
+                            : const Text(
+                                'Report',
+                                style: TextStyle(
+                                  fontFamily: 'Inter',
+                                  fontSize: 16,
+                                  color: Colors.white,
+                                ),
+                              )),
+                  ),
+                ],
+              ),
             ),
           ),
         ));

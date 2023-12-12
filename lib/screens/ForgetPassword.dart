@@ -18,6 +18,7 @@ void _resetPassword() async {
     try {
       await _auth.sendPasswordResetEmail(email: _email);
       // Show success message
+      // ignore: use_build_context_synchronously
       showDialog(
         context: context,
         builder: (BuildContext context) {

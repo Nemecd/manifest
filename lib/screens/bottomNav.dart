@@ -8,22 +8,28 @@ import 'package:provider/provider.dart';
 import '../Provider/provider.dart';
 
 class bottomNav extends StatefulWidget {
-  final String userName;
-  const bottomNav({super.key, required this.userName});
+  final String userId;
+  const bottomNav({super.key, required this.userId});
 
   @override
   State<bottomNav> createState() => _bottomNavState();
 }
 
 class _bottomNavState extends State<bottomNav> {
+  late String userId;
    int _currentIndex = 0;
-  final List<Widget> _screens = [
-    const DashuserScreen(userId: '',),
-    const ScanScreen(),
-    const SupportScreen(),
-    const SettingScreen(),
-  ];
-  
+    List<Widget> _screens = [];
+  @override
+  void initState() {
+    super.initState();
+     userId = widget.userId; 
+    _screens = [
+      const DashuserScreen(userId: '',),
+      const ScanScreen(),
+      const SupportScreen(),
+      const SettingScreen(),
+    ];
+  } 
   @override
   Widget build(BuildContext context) {
     return Consumer<UserProvider>(

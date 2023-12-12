@@ -1,9 +1,10 @@
+// ignore_for_file: use_build_context_synchronously, avoid_print, sized_box_for_whitespace
+
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:manifest/Models/user.dart';
 import 'package:manifest/screens/ForgetPassword.dart';
-import 'package:manifest/screens/HomeScreen.dart';
 import 'package:manifest/screens/SignupScreen.dart';
 import 'package:manifest/screens/bottomNav.dart';
 import 'package:manifest/screens/toastMsg.dart';
@@ -330,6 +331,7 @@ class _SigninScreenState extends State<SigninScreen> {
         .get();
 
     if (userDoc.exists) {
+      // String userId = userDoc['userId'];
       String userName = userDoc['name'];
       String userPhoneNumber = userDoc['phone_number'];
       String userEmail = userDoc['email'];
@@ -337,7 +339,8 @@ class _SigninScreenState extends State<SigninScreen> {
       UserModel user = UserModel(
         name: userName,
         phoneNumber: userPhoneNumber,
-        email: userEmail,
+        email: userEmail, 
+        userId: userId,
       );
 
       Provider.of<UserProvider>(context, listen: false).updateUser(user);
@@ -353,7 +356,7 @@ class _SigninScreenState extends State<SigninScreen> {
 
       if (userData['userId'] != null && userData['userId']!.isNotEmpty) {
         var route = MaterialPageRoute(
-          builder: (context) => bottomNav(userName: userName),
+          builder: (context) => bottomNav(userId: userId),
         );
         Navigator.push(context, route);
       } else {
@@ -367,7 +370,7 @@ class _SigninScreenState extends State<SigninScreen> {
         print('Saved data: userId: $userId, userName: $userName, userPhoneNumber: $userPhoneNumber, userEmail: $userEmail,isLoggedIn: true');
 
         var route = MaterialPageRoute(
-          builder: (context) => bottomNav(userName: userName),
+          builder: (context) => bottomNav(userId: userId),
         );
         Navigator.push(context, route);
       }
@@ -383,11 +386,13 @@ class _SigninScreenState extends State<SigninScreen> {
     final userId = prefs.getString('userId') ?? '';
     final userName = prefs.getString('userName') ?? '';
     final userEmail = prefs.getString('email') ?? '';
+    final userPhoneNumber = prefs.getString('phoneNumber') ?? '';
     final isLoggedIn = prefs.getBool('isLoggedIn') ?? false;
     return {
       'userId': userId,
       'userName': userName,
       'userEmail': userEmail,
+      'userPhoneNumber': userPhoneNumber,
       'isLoggedIn':
           isLoggedIn.toString(), // Return the flag along with user data
     };

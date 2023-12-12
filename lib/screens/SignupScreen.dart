@@ -6,10 +6,8 @@ import 'package:flutter/material.dart';
 import 'package:google_sign_in/google_sign_in.dart';
 import 'package:manifest/Models/user.dart';
 import 'package:manifest/Provider/provider.dart';
-import 'package:manifest/screens/HomeScreen.dart';
 import 'package:manifest/screens/SigninScreen.dart';
 import 'package:manifest/screens/bottomNav.dart';
-import 'package:manifest/screens/firebase/google.dart';
 import 'package:manifest/screens/toastMsg.dart';
 import 'package:provider/provider.dart';
 import 'package:shared_preferences/shared_preferences.dart';
@@ -168,7 +166,7 @@ class _SignupScreenState extends State<SignupScreen> {
                         if (value!.isEmpty) {
                           return 'please enter your phone number';
                         }
-                        if (value!.length > 15) {
+                        if (value.length > 15) {
                           return 'Invaild number';
                         }
                         return null;
@@ -407,7 +405,7 @@ class _SignupScreenState extends State<SignupScreen> {
           UserModel newUser = UserModel(
             name: userName,
             phoneNumber: userPhoneNumber,
-            email: userEmail,
+            email: userEmail, userId: '',
           );
 
           Provider.of<UserProvider>(context, listen: false).updateUser(newUser);
@@ -425,7 +423,7 @@ class _SignupScreenState extends State<SignupScreen> {
           Navigator.push(
             context,
             MaterialPageRoute(
-              builder: (context) => bottomNav(userName: userName),
+              builder: (context) => bottomNav(userId: userId),
             ),
           );
         } else {
@@ -470,7 +468,7 @@ Future<void> signInWithGoogle() async {
         UserModel user = UserModel(
           // userId: user.uid,
           name: userDoc['name'],
-          phoneNumber: userDoc['phone_number'], email: '',
+          phoneNumber: userDoc['phone_number'], email: '', userId: '',
         );
 
         // Update the user provider with the user's data
@@ -481,7 +479,7 @@ Future<void> signInWithGoogle() async {
         Navigator.push(
           context,
           MaterialPageRoute(
-            builder: (context) => bottomNav(userName: userName),
+            builder: (context) => bottomNav(userId: userId),
           ),
         );
       } else {

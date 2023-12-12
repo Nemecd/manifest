@@ -13,20 +13,19 @@ class ScanScreen extends StatefulWidget {
 }
 
 class _ScanScreenState extends State<ScanScreen> {
+  String scannedData = '';
+  bool scanSuccess = false;
 
-String scannedData = '';
-bool scanSuccess = false;
+  Future<void> startScan() async {
+    try {
+      var result = await BarcodeScanner.scan();
+      setState(() {
+        scannedData = result.rawContent;
+      });
 
-Future<void> startScan() async {
-  try {
-    var result = await BarcodeScanner.scan();
-    setState(() {
-      scannedData = result.rawContent;
-    });
-
-    if (scannedData.isNotEmpty) {
-      showToast(message: 'Scan Complete !');
-              Navigator.push(
+      if (scannedData.isNotEmpty) {
+        showToast(message: 'Scan Complete !');
+        Navigator.push(
           context,
           MaterialPageRoute(
             builder: (context) => DisplayScannedDataScreen(
@@ -34,14 +33,14 @@ Future<void> startScan() async {
             ),
           ),
         );
-    } else {
-      showToast(message: 'Invalid QR code format');
-      print('Invalid QR code format');
+      } else {
+        showToast(message: 'Invalid QR code format');
+        print('Invalid QR code format');
+      }
+    } catch (e) {
+      print('Error: $e');
     }
-  } catch (e) {
-    print('Error: $e');
   }
-}
 
   @override
   Widget build(BuildContext context) {
@@ -70,19 +69,31 @@ Future<void> startScan() async {
                         letterSpacing: 1),
                   ),
                 ])),
+            Image.asset('assets/img/qr.png', width: 500, height: 500),
             ElevatedButton(
-              onPressed: (){
+              onPressed: () {
                 startScan();
               },
-              child: const Text('Start Scan'),
-            ),
-            const SizedBox(height: 20),
-            const Expanded(
-              flex: 1,
-              child: Center(
-                child: Text('Scan a QR code'),
+              child: Padding(
+                padding: const EdgeInsets.all(12.0),
+                child: Text(
+                  'Start Scan',
+                  style: TextStyle(
+                    color: Colors.blue,
+                    fontSize: 18,
+                  ),
+                ),
               ),
-            )
+              style: ElevatedButton.styleFrom(
+                backgroundColor: Colors.white, // White background
+                shape: RoundedRectangleBorder(
+                  borderRadius: BorderRadius.circular(10), // Rounded corners
+                ),
+              ),
+            ),
+
+            const SizedBox(height: 20),
+           
           ],
         ),
       ),

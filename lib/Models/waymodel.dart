@@ -1,3 +1,5 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
+
 class WayTrip {
   final String wayNumber;
   final String senderName;
@@ -27,20 +29,21 @@ class WayTrip {
       'receiverPhone': receiverPhone,
       'origination': origination,
       'destination': destination,
-      'dateTime': dateTime.toIso8601String(),
+      'dateTime': dateTime,
     };
   }
 
-  factory WayTrip.fromJson(Map<String, dynamic> json) {
-    return WayTrip(
-      wayNumber: json['wayNumber'],
-      senderName: json['senderName'],
-      senderPhone: json['sendPhone'],
-      receiverName: json['receiverName'],
-      receiverPhone: json['receiverPhone'],
-      origination: json['origination'],
-      destination: json['destination'],
-      dateTime: DateTime.parse(json['dateTime']),
-    );
-  }
+factory WayTrip.fromJson(Map<String, dynamic> json) {
+  return WayTrip(
+    wayNumber: json['wayNumber'] ?? '', // Handling null for 'wayNumber'
+    senderName: json['senderName'] ?? '', // Handling null for 'senderName'
+    senderPhone: json['senderPhone'] ?? '', // Handling null for 'senderPhone'
+    receiverName: json['receiverName'] ?? '', // Handling null for 'receiverName'
+    receiverPhone: json['receiverPhone'] ?? '', // Handling null for 'receiverPhone'
+    origination: json['origination'] ?? '', // Handling null for 'origination'
+    destination: json['destination'] ?? '', // Handling null for 'destination'
+    dateTime: json['dateTime'] != null ? (json['dateTime'] as Timestamp).toDate() : DateTime.now(),
+  );
+}
+
 }
